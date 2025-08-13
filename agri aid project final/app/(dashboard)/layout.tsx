@@ -1,0 +1,152 @@
+import Link from 'next/link';
+import {
+  ClipboardCheck,
+  Home,
+  Leaf,
+  PanelLeft,
+  ShieldCheck,
+  Sun,
+} from 'lucide-react';
+
+import { Button } from '@/components/ui/button';
+import {
+  Sheet,
+  SheetContent,
+  SheetTrigger,
+} from '@/components/ui/sheet';
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from '@/components/ui/tooltip';
+
+export default function DashboardLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  return (
+    <TooltipProvider>
+      <div className="flex min-h-screen w-full flex-col bg-muted/40">
+        <aside className="fixed inset-y-0 left-0 z-10 hidden w-14 flex-col border-r bg-background sm:flex">
+          <nav className="flex flex-col items-center gap-4 px-2 sm:py-5">
+            <Link
+              href="/"
+              className="group flex h-9 w-9 shrink-0 items-center justify-center gap-2 rounded-full bg-primary text-lg font-semibold text-primary-foreground md:h-8 md:w-8 md:text-base"
+            >
+              <Leaf className="h-4 w-4 transition-all group-hover:scale-110" />
+              <span className="sr-only">AgriAid AI</span>
+            </Link>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Link
+                  href="/dashboard"
+                  className="flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground md:h-8 md:w-8"
+                >
+                  <Home className="h-5 w-5" />
+                  <span className="sr-only">Dashboard</span>
+                </Link>
+              </TooltipTrigger>
+              <TooltipContent side="right">Dashboard</TooltipContent>
+            </Tooltip>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Link
+                  href="/dashboard/planting-advisor"
+                  className="flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground md:h-8 md:w-8"
+                >
+                  <Sun className="h-5 w-5" />
+                  <span className="sr-only">Planting Advisor</span>
+                </Link>
+              </TooltipTrigger>
+              <TooltipContent side="right">Planting Advisor</TooltipContent>
+            </Tooltip>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Link
+                  href="/dashboard/plant-disease-detector"
+                  className="flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground md:h-8 md:w-8"
+                >
+                  <ShieldCheck className="h-5 w-5" />
+                  <span className="sr-only">Plant Disease Detector</span>
+                </Link>
+              </TooltipTrigger>
+              <TooltipContent side="right">Plant Disease Detector</TooltipContent>
+            </Tooltip>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Link
+                  href="/dashboard/crop-care-schedule"
+                  className="flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground md:h-8 md:w-8"
+                >
+                  <ClipboardCheck className="h-5 w-5" />
+                  <span className="sr-only">Crop Care Schedule</span>
+                </Link>
+              </TooltipTrigger>
+              <TooltipContent side="right">Crop Care Schedule</TooltipContent>
+            </Tooltip>
+          </nav>
+        </aside>
+        <div className="flex flex-col sm:gap-4 sm:py-4 sm:pl-14">
+          <header className="sticky top-0 z-30 flex h-14 items-center gap-4 border-b bg-background px-4 sm:static sm:h-auto sm:border-0 sm:bg-transparent sm:px-6">
+            <Sheet>
+              <SheetTrigger asChild>
+                <Button size="icon" variant="outline" className="sm:hidden">
+                  <PanelLeft className="h-5 w-5" />
+                  <span className="sr-only">Toggle Menu</span>
+                </Button>
+              </SheetTrigger>
+              <SheetContent side="left" className="sm:max-w-xs">
+                <nav className="grid gap-6 text-lg font-medium">
+                  <Link
+                    href="/"
+                    className="group flex h-10 w-10 shrink-0 items-center justify-center gap-2 rounded-full bg-primary text-lg font-semibold text-primary-foreground md:text-base"
+                  >
+                    <Leaf className="h-5 w-5 transition-all group-hover:scale-110" />
+                    <span className="sr-only">AgriAid AI</span>
+                  </Link>
+                  <Link
+                    href="/dashboard"
+                    className="flex items-center gap-4 px-2.5 text-muted-foreground hover:text-foreground"
+                  >
+                    <Home className="h-5 w-5" />
+                    Dashboard
+                  </Link>
+                  <Link
+                    href="/dashboard/planting-advisor"
+                    className="flex items-center gap-4 px-2.5 text-muted-foreground hover:text-foreground"
+                  >
+                    <Sun className="h-5 w-5" />
+                    Planting Advisor
+                  </Link>
+                  <Link
+                    href="/dashboard/plant-disease-detector"
+                    className="flex items-center gap-4 px-2.5 text-muted-foreground hover:text-foreground"
+                  >
+                    <ShieldCheck className="h-5 w-5" />
+                    Disease Detector
+                  </Link>
+                  <Link
+                    href="/dashboard/crop-care-schedule"
+                    className="flex items-center gap-4 px-2.5 text-muted-foreground hover:text-foreground"
+                  >
+                    <ClipboardCheck className="h-5 w-5" />
+                    Crop Care Schedule
+                  </Link>
+                </nav>
+              </SheetContent>
+            </Sheet>
+             <div className="flex items-center gap-2">
+                <Leaf className="h-7 w-7 text-primary hidden sm:block" />
+                <h1 className="font-headline text-2xl font-bold text-foreground">AgriAid AI</h1>
+            </div>
+          </header>
+          <main className="grid flex-1 items-start gap-4 p-4 sm:px-6 sm:py-0 md:gap-8">
+            {children}
+          </main>
+        </div>
+      </div>
+    </TooltipProvider>
+  );
+}
